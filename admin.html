@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Grand Horizon Hotel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .admin-content {
+            display: none;
+        }
+        .active-tab {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div>
+                        <a href="index.html" class="flex items-center py-4 px-2">
+                            <span class="font-semibold text-gray-500 text-lg">Grand Horizon</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="index.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Home</a>
+                    <a href="rooms.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Rooms</a>
+                    <a href="book.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Book Now</a>
+                    <a href="contact.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Contact</a>
+                    <a href="admin.html" class="py-4 px-2 text-blue-500 border-b-4 border-blue-500 font-semibold">Admin</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Login Section -->
+    <section id="loginSection" class="flex items-center justify-center min-h-screen">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h2 class="text-2xl font-bold text-center mb-8">Admin Login</h2>
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-gray-700 font-medium mb-2">Username</label>
+                    <input type="text" id="username" name="username" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+                    <input type="password" id="password" name="password" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">
+                        Login
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard Content (hidden until login) -->
+    <section id="adminSection" class="admin-content py-8 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-8">Admin Dashboard</h2>
+            
+            <!-- Tabs -->
+            <div class="border-b border-gray-200 mb-8">
+                <nav class="flex space-x-8">
+                    <button id="roomsTab" class="py-4 px-1 font-medium text-gray-500 hover:text-blue-500 active-tab">
+                        Manage Rooms
+                    </button>
+                    <button id="bookingsTab" class="py-4 px-1 font-medium text-gray-500 hover:text-blue-500">
+                        View Bookings
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Rooms Management -->
+            <div id="roomsContent" class="tab-content">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Room Inventory</h3>
+                    <button id="addRoomBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                        <i class="fas fa-plus mr-2"></i>Add New Room
+                    </button>
+                </div>
+
+                <!-- Rooms Table -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Room Type</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Availability</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Sample Data - Will be populated dynamically -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">101</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Deluxe Room</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$199</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Available</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
+                                    <button class="text-red-600 hover:text-red-900">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">201</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Executive Suite</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$299</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Booked</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
+                                    <button class="text-red-600 hover:text-red-900">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Bookings Management -->
+            <div id="bookingsContent" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Current Bookings</h3>
+                    <div class="flex space-x-4">
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300">
+                            <i class="fas fa-download mr-2"></i>Export
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bookings Table -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booking ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Room Type</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Check-In</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Check-Out</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Sample Data - Will be populated dynamically -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">B-1001</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">John Smith</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Executive Suite</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-12-15</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-12-20</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">B-1002</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Sarah Johnson</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Deluxe Room</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-12-10</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-12-12</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Confirmed</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap">
+                <div class="w-full md:w-1/3 px-4 mb-8">
+                    <h3 class="text-xl font-bold mb-4">Grand Horizon</h3>
+                    <p class="text-gray-400">123 Luxury Avenue, Resort City</p>
+                    <p class="text-gray-400">Phone: +1 234 567 890</p>
+                    <p class="text-gray-400">Email: info@grandhorizon.com</p>
+                </div>
+                <div class="w-full md:w-1/3 px-4 mb-8">
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul>
+                        <li class="mb-2"><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li class="mb-2"><a href="rooms.html" class="text-gray-400 hover:text-white">Rooms</a></li>
+                        <li class="mb-2"><a href="book.html" class="text-gray-400 hover:text-white">Book Now</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/3 px-4 mb-8">
+                    <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f text-2xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-2xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-2xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Grand Horizon Hotel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Admin Login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple password check (in real app, this would be server-side)
+            if (username === 'admin' && password === 'admin123') {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('adminSection').style.display = 'block';
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        });
+
+        // Tab Switching
+        document.getElementById('roomsTab').addEventListener('click', function() {
+            document.getElementById('bookingsTab').classList.remove('active-tab');
+            this.classList.add('active-tab');
+            document.getElementById('bookingsContent').classList.add('hidden');
+            document.getElementById('roomsContent').classList.remove('hidden');
+        });
+
+        document.getElementById('bookingsTab').addEventListener('click', function() {
+            document.getElementById('roomsTab').classList.remove('active-tab');
+            this.classList.add('active-tab');
+            document.getElementById('roomsContent').classList.add('hidden');
+            document.getElementById('bookingsContent').classList.remove('hidden');
+        });
+
+        // Add Room Button
+        document.getElementById('addRoomBtn').addEventListener('click', function() {
+            alert('Add new room functionality would be implemented here');
+        });
+    </script>
+</body>
+</html>
